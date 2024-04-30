@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+<link rel="static stylesheet" href="{% static 'assets/css/scroll.css' %}">
+<br>
+<br>
+<br>
+<br>
+  <div class="container">
+    <center>
+      <h3>Total sum</h3>
+      {{ total_sum }}
+    </center>
+    <div class="container-scroll">
+      <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Имя</th>
+          <th scope="col">Вилла</th>
+          <th scope="col">Дата создания</th>
+          <th scope="col">Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for order in storages %}
+        <tr>
+          <td>{{ order.full_name }}</td>
+          <td>{{ order.house }}</td>
+          <td>{{ order.created_date|date:"l Y.m.d" }}</td>
+          <td>{{ order.get_status_display }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

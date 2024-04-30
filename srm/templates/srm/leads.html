@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+<link rel="static stylesheet" href="{% static 'assets/css/scroll.css' %}">
+<br>
+<br>
+<br>
+<br>
+  <div class="container">
+    <div class="container-scroll">
+        <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ФИО</th>
+            <th scope="col">Email</th>
+            <th scope="col">subject</th>
+            <th scope="col">Дата создания</th>
+            <th scope="col">Статус</th>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for lead in leads %}
+          <tr>
+            <td>{{ lead.full_name }}</td>
+            <td>{{ lead.email }}</td>
+            <td>{{ lead.subject_line }}</td>
+            <td>{{ lead.created_date|date:"l Y.m.d" }}</td>
+            <td>{{ lead.get_status_display }}</td>
+            <td><a href="{% url 'lead_delete' lead.id %}">Удалить</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+{% endblock %}
